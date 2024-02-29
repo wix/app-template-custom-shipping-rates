@@ -1,6 +1,6 @@
 # Wix App Template: Custom Shipping Rates
 
-The Custom Shipping Rates app template is part of the [Wix app templates collection](https://dev.wix.com/apps/templates).
+The Custom Shipping Rates app template is part of the [Wix app templates collection](https://dev.wix.com/apps-templates).
 
 This [Next.js 14](https://nextjs.org/) template demos a simple shipping solution, is fully customizable and sets a foundation for developing self-hosted Wix apps. It takes care of webhooks and OAuth, implements a Wix SPI and features a pre-built dashboard page, designed with the Wix Design System and built with the Wix Dashboard SDK.
 
@@ -11,7 +11,7 @@ The template handles common app functionalities, laying the groundwork for furth
 
 Wix apps enhance the functionality of Wix sites by adding new features such as custom pages, dashboard components, third-party integrations, or site analytics. Starting with an app template fast-tracks the development process, providing a working foundational app that developers can modify and build upon. This approach saves valuable time, allowing for a quick transition from concept to a fully functional app.
 
-Learn more about [Wix app templates](https://dev.wix.com/docs/build-apps/developer-tools/templates-and-examples/get-started-from-an-app-template) and explore our growing [template collection](https://dev.wix.com/apps/templates).
+Learn more about [Wix app templates](https://dev.wix.com/docs/build-apps/developer-tools/templates-and-examples/get-started-from-an-app-template) and explore our growing [template collection](https://dev.wix.com/apps-templates).
 
 
 ## Template features
@@ -28,7 +28,7 @@ This Wix app template incorporates the following features:
 
 ## Quick deployment on Vercel or Netlify
 
-This template supports quick deployment on Vercel or Netlify, automating the setup process to get your app running with minimal configuration. To clone the repo and get the app up and running on Vercel or Netlify in minutes, go to the [app template page](https://dev.wix.com/apps/templates/path=/644fdc01-0c0f-4a7e-ae56-3b3a7875a67c) and follow the instructions there.
+This template supports quick deployment on Vercel or Netlify, automating the setup process to get your app running with minimal configuration. To clone the repo and get the app up and running on Vercel or Netlify in minutes, go to the [app template page](https://dev.wix.com/apps-templates/template?id=644fdc01-0c0f-4a7e-ae56-3b3a7875a67c) and follow the instructions there.
 
 
 ## Quick deployment on a different platform
@@ -45,7 +45,7 @@ Follow your platform's instructions to clone the repo and deploy the app server,
 
 To generate an app in the Wix Dev Center and pre-configure it automatically for the template:
 
-1. Go to the [app template page](https://dev.wix.com/apps/templates/path=/644fdc01-0c0f-4a7e-ae56-3b3a7875a67c) and click **Use Template**.
+1. Go to the [app template page](https://dev.wix.com/apps-templates/template?id=644fdc01-0c0f-4a7e-ae56-3b3a7875a67c) and click **Use Template**.
 
 1. Under **Select your hosting service**, select **Deploy somewhere else**, then click **Continue**.
 
@@ -203,4 +203,4 @@ You can also add routes to support additional webhooks, basing your implementati
 For more information:
 
 + Learn more about [Wix app templates](https://dev.wix.com/docs/build-apps/developer-tools/templates-and-examples/get-started-from-an-app-template).
-+ Check out our [full collection of app templates](https://dev.wix.com/apps/templates).
++ Check out our [full collection of app templates](https://dev.wix.com/apps-templates).
