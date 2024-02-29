@@ -164,7 +164,7 @@ Customize the dashboard page to fit your specific needs, whether it's updating t
 
 **Development entry point:** [`src/app/dashboard/page.tsx`](./src/app/dashboard/page.tsx)
 
-This file contains the parent component for the dashboard interface. The interface uses the app model defined in [`app-data.model.ts`](./src/app/types/app-data.model.ts) to provide an array of shipping delivery methods. It's a prime location for extending the dashboard functionality or integrating additional services.
+This file contains the parent component for the dashboard interface. The interface uses the app model defined in [`src/app/types/app-data.model.ts`](./src/app/types/app-data.model.ts) to provide an array of shipping delivery methods. It's a prime location for extending the dashboard functionality or integrating additional services.
 
 
 ### Integrate the app with an external database
