@@ -1,4 +1,4 @@
-# Wix App Template: Custom Shipping Rates
+# Wix Self-Hosted App Template: Custom Shipping Rates
 
 The Custom Shipping Rates app template is part of the [Wix app templates collection](https://dev.wix.com/apps-templates).
 
@@ -9,7 +9,7 @@ The template handles common app functionalities, laying the groundwork for furth
 
 ## About Wix app templates
 
-Wix apps enhance the functionality of Wix sites by adding new features such as custom pages, dashboard components, third-party integrations, or site analytics. Starting with an app template fast-tracks the development process, providing a working foundational app that developers can modify and build upon. This approach saves valuable time, allowing for a quick transition from concept to a fully functional app.
+[Wix apps](https://dev.wix.com/docs/build-apps) enhance the functionality of Wix sites by adding new features such as custom pages, dashboard components, third-party integrations, or site analytics. Starting with an app template fast-tracks the development process, providing a working foundational app that developers can modify and build upon. This approach saves valuable time, allowing for a quick transition from concept to a fully functional app.
 
 Learn more about [Wix app templates](https://dev.wix.com/docs/build-apps/developer-tools/templates-and-examples/get-started-from-an-app-template) and explore our growing [template collection](https://dev.wix.com/apps-templates).
 
@@ -20,20 +20,33 @@ This Wix app template incorporates the following features:
 
 + **Self-hosting:** Develop and host an app on any platform, and integrate with Wix using the Wix Dev Center.
 + **OAuth:** Secure authentication flow following Wix's guidelines.
-+ **Wix Design System:** Utilize Wix's reusable React components for a cohesive user experience.
++ **Wix Design System:** Utilize Wix's reusable React components for a cohesive user experience consistent with Wix's design standards.
 + **Wix Dashboard SDK:** Integrate custom dashboard components with the Wix site dashboard.
 + **Shipping Rates SPI:** Integrate custom logic for calculating shipping rates.
-+ **Webhooks:** Pre-configured to handle app lifecycle events.
++ **Webhooks:** Handle app lifecycle events.
 
 
-## Quick deployment on Vercel or Netlify
+## Prerequisites
 
-This template supports quick deployment on Vercel or Netlify, automating the setup process to get your app running with minimal configuration. To clone the repo and get the app up and running on Vercel or Netlify in minutes, go to the [app template page](https://dev.wix.com/apps-templates/template?id=644fdc01-0c0f-4a7e-ae56-3b3a7875a67c) and follow the instructions there.
+Before getting started, make sure you have the following set up:
+
++ [Node.js](https://nodejs.org/en/) (v18.16.0 or higher).
++ A [Wix developer account](https://users.wix.com/signin?loginDialogContext=signup&referralInfo=HEADER&postLogin=https:%2F%2Fdev.wix.com%2Fdc3%2Fmy-apps&postSignUp=https:%2F%2Fdev.wix.com%2Fdc3%2Fmy-apps&forceRender=true).
 
 
-## Quick deployment on a different platform
+## Deploy to a free hosting service
 
-To deploy on any other platform, follow these steps:
+This template supports [quick deployment on Vercel or Netlify](https://dev.wix.com/apps-templates/template?id=644fdc01-0c0f-4a7e-ae56-3b3a7875a67c) so you can get your app up and running in minutes. With quick deployment, you can:
+
++ Clone the app template repo and deploy a live app server instantly.
++ Generate a pre-configured app in the [Wix Dev Center](https://dev.wix.com/docs/build-apps/developer-tools/developers-center/get-started-with-the-wix-developers-center). For configuration details, read about [what deployment gives you](#what-deployment-gives-you).
+
+For instructions, go to the [app template page](https://dev.wix.com/apps-templates/template?id=644fdc01-0c0f-4a7e-ae56-3b3a7875a67c).
+
+
+## Deployment on a different platform
+
+To deploy the template on any other platform, follow these steps:
 
 
 ### Step 1 | Deploy the app's server code
@@ -41,21 +54,20 @@ To deploy on any other platform, follow these steps:
 Follow your platform's instructions to clone the repo and deploy the app server, then find and copy the deployment domain. This is the base URL for your app's server.
 
 
-### Step 2 | Create an app in the Wix Dev Center
+### Step 2 | Generate a pre-configured Wix Dev Center app
 
-To generate an app in the Wix Dev Center and pre-configure it automatically for the template:
+To generate an app in the [Wix Dev Center](https://dev.wix.com/docs/build-apps/developer-tools/developers-center/get-started-with-the-wix-developers-center) and pre-configure it automatically for the template:
 
-1. Go to the [app template page](https://dev.wix.com/apps-templates/template?id=644fdc01-0c0f-4a7e-ae56-3b3a7875a67c) and click **Use Template**.
-
-1. Under **Select your hosting service**, select **Deploy somewhere else**, then click **Continue**.
+1. Go back to the original quick deployment browser window.
 
 1. Under **App name**, enter a name for your app. For example: "Custom Shipping Rates".
 
-1. Under **Base URL**, enter the base URL for your deployment.
+1. Under **Base URL**, enter the base URL you saved earlier.
 
 1. Click **Create & Continue**.
 
 This creates an app for you in the Wix Dev Center with the required URLs and permissions pre-configured.
+
 
 
 ### Step 3 | Configure environment variables
@@ -66,7 +78,7 @@ Once your app is created, a screen appears with environment variables you need t
 + `WIX_APP_SECRET`: Your app's secret key.
 + `WIX_APP_JWT_KEY`: Your app's public key.
 
-Save these environment variables in your app code and redeploy the app. When deployment is finished, your app is ready to install.
+Save these environment variables inthe `.env` file in your app code and redeploy the app. When deployment is finished, your app is ready to install.
 
 
 ### Step 4 | Test the app
@@ -88,7 +100,7 @@ Follow these steps to create a [development site](https://dev.wix.com/docs/build
 Your app is now installed on your development site. To see the app's dashboard page, click **Apps** in the site dashboard's left sidebar, then click **Custom Shipping Rates**.
 
 
-## What quick deployment gives you
+## What deployment gives you
 
 When you deploy this template, an app is automatically created for you in the [Wix Dev Center](https://dev.wix.com/apps/my-apps), pre-configured with settings required for the app to function properly within the Wix ecosystem. Find these pre-configured settings later in the app's dashboard as follows:
 
@@ -121,7 +133,7 @@ While developing your app, you may also wish to deploy and test it locally. You 
 
 1. Create a file called `.env.local` in the repo's root folder. In that file, paste the required environment variables that you copied during quick deployment.
 
-    If you didn't copy these values during quick deployment, you can retrieve them in the Wix Dev Center, then paste them in the following format:
+    If you didn't copy these values during quick deployment, you can retrieve them in the [Wix Dev Center](https://dev.wix.com/apps), then paste them in the following format:
 
     ```env
     # App ID and App Secret Key: Retrieve from the OAuth page in the app's dashboard in the Wix Dev Center.
@@ -204,3 +216,4 @@ For more information:
 
 + Learn more about [Wix app templates](https://dev.wix.com/docs/build-apps/developer-tools/templates-and-examples/get-started-from-an-app-template).
 + Check out our [full collection of app templates](https://dev.wix.com/apps-templates).
++ See our documentation for details about [building Wix apps](https://dev.wix.com/docs/build-apps).
