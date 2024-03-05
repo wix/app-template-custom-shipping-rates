@@ -26,6 +26,14 @@ This Wix app template incorporates the following features:
 + **Webhooks:** Handle app lifecycle events.
 
 
+## Prerequisites
+
+Before getting started, make sure you have the following set up:
+
++ [Node.js](https://nodejs.org/en/) (v18.16.0 or higher).
++ A [Wix developer account](https://users.wix.com/signin?loginDialogContext=signup&referralInfo=HEADER&postLogin=https:%2F%2Fdev.wix.com%2Fdc3%2Fmy-apps&postSignUp=https:%2F%2Fdev.wix.com%2Fdc3%2Fmy-apps&forceRender=true).
+
+
 ## Deploy to a free hosting service
 
 This template supports [quick deployment on Vercel or Netlify](https://dev.wix.com/apps-templates/template?id=644fdc01-0c0f-4a7e-ae56-3b3a7875a67c) so you can get your app up and running in minutes. With quick deployment, you can:
