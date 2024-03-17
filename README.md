@@ -58,27 +58,38 @@ Follow your platform's instructions to clone the repo and deploy the app server,
 
 To generate an app in the [Wix Dev Center](https://dev.wix.com/docs/build-apps/developer-tools/developers-center/get-started-with-the-wix-developers-center) and pre-configure it automatically for the template:
 
-1. Go back to the original quick deployment browser window.
+1. On the template page, click **Use Template**.
+
+1. Under **Select your hosting service**, select **Deploy somewhere else** and click **Continue**.
+
+1. Under **Add your base URL**, enter your deployment's base URL.
 
 1. Under **App name**, enter a name for your app. For example: "Custom Shipping Rates".
-
-1. Under **Base URL**, enter the base URL you saved earlier.
 
 1. Click **Create & Continue**.
 
 This creates an app for you in the Wix Dev Center with the required URLs and permissions pre-configured.
 
 
-
 ### Step 3 | Configure environment variables
 
-Once your app is created, a screen appears with environment variables you need to copy to your app code:
+Once your app is created, a screen appears with a code snippet containing environment variables you need to save in your app code:
 
 + `WIX_APP_ID`: Your app's Wix App ID.
 + `WIX_APP_SECRET`: Your app's secret key.
 + `WIX_APP_JWT_KEY`: Your app's public key.
 
-Save these environment variables inthe `.env` file in your app code and redeploy the app. When deployment is finished, your app is ready to install.
+Save these environment variables as follows:
+
+1. Click **copy** to copy the code snippet to the clipboard.
+
+1. Create a file in your production root folder called `.env`, paste the code snippet into the file and save it.
+
+    **Note:** Always keep your `.env` secure and never commit it to version control. This file contains sensitive keys that should not be exposed publicly.
+
+1. Redeploy the app.
+
+When deployment is finished, your app is ready to install.
 
 
 ### Step 4 | Test the app
