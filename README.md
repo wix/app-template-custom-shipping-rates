@@ -181,7 +181,7 @@ The template is designed for easy customization and extension. Here are some sug
 
 ### Dashboard page customization
 
-The dashboard page is pre-integrated with the [Wix Design System](https://www.wixdesignsystem.com/) and [Wix Dashboard SDK](https://dev.wix.com/docs/sdk/api-reference/dashboard/introduction), providing a simple user interface that includes support for server-side rendering. It includes navigation to other relevant pages and an example of a shipping delivery form, and it utilizes the [Wix Data API](https://dev.wix.com/docs/sdk/api-reference/data/items/query-data-items) to query and present the last three orders in the dashboard. It utilizes both [client-side](./src/app/utils/wix-sdk.client.ts) and [server-side](./src/app/utils/wix-sdk.ssr.ts) SDK implementations.
+The dashboard page is pre-integrated with the [Wix Design System](https://www.wixdesignsystem.com/) and [Wix Dashboard SDK](https://dev.wix.com/docs/sdk/api-reference/dashboard/introduction), providing a simple user interface that includes support for server-side rendering. It includes navigation to other relevant pages and an example of a shipping delivery form, and it utilizes the [Wix Data API](https://dev.wix.com/docs/sdk/api-reference/data/items/query-data-items) to query and present the last three orders in the dashboard. It utilizes both [client-side](./src/app/utils/wix-sdk.client-only.ts) and [server-side](./src/app/utils/wix-sdk.ts)(can be used from the client too, but would increase bundle size) SDK implementations.
 
 Customize the dashboard page to fit your specific needs, whether it's updating the UI or adding new features.
 
@@ -189,6 +189,11 @@ Customize the dashboard page to fit your specific needs, whether it's updating t
 
 This file contains the parent component for the dashboard interface. The interface uses the app model defined in [`src/app/types/app-data.model.ts`](./src/app/types/app-data.model.ts) to provide an array of shipping delivery methods. It's a prime location for extending the dashboard functionality or integrating additional services.
 
+#### Server actions support
+Server actions were introduced in Next 13.5, and are a great way to handle server logic in a Next.js app.
+The template was created with server actions in mind, and the dashboard page is a great place to start using them.
+Since not all deployment providers support server actions, the template is set up **not** to use server actions by default.
+In order to use server actions, just uncomment `// 'use server';` in the actions definitions in [`src/app/actions/app-data.ts`](./src/app/actions/app-data.ts) and [`src/app/actions/orders.ts`](./src/app/actions/orders.ts) and redeploy the app.
 
 ### Integrate the app with an external database
 

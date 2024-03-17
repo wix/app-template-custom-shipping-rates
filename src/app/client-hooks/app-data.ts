@@ -12,7 +12,7 @@ export const useShippingAppData = () => {
   return useQuery<ShippingAppData>({
     queryKey,
     queryFn: async () => {
-      const accessToken = await accessTokenPromise;
+      const accessToken = (await accessTokenPromise)!;
       return getShippingAppData({ accessToken });
     },
   });
@@ -23,7 +23,7 @@ export const useSetShippingAppData = () => {
   const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
     mutationFn: async (newData: ShippingAppData) => {
-      const accessToken = await accessTokenPromise;
+      const accessToken = (await accessTokenPromise)!;
       return setShippingAppData(newData, { accessToken });
     },
     onSuccess: (data) => {

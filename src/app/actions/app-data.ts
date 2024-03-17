@@ -1,8 +1,12 @@
-'use server';
+// 'use server';
+/**
+ *  if your deployment provider supports it, you can uncomment the line above to use server actions
+ *  This will decrease the bundle size and improve performance by moving the server code to the server.
+ */
 import { ShippingAppData, ShippingMethodType, ShippingUnitOfMeasure } from '@/app/types/app-data.model';
-import { getAppInstance, parseAccessToken } from '@/app/actions/app-instance';
+import { parseAccessToken } from '@/app/actions/app-instance';
 
-type AppIdentifier = { instanceId?: string | null; accessToken?: string | null } | undefined;
+type AppIdentifier = { instanceId?: string; accessToken?: string };
 
 const defaultAppData: ShippingAppData = {
   shippingMethods: [
@@ -38,11 +42,12 @@ const defaultAppData: ShippingAppData = {
 };
 
 const getDatabaseKey = async (appIdentifier: AppIdentifier) => {
-  let instanceId = appIdentifier?.instanceId;
+  let instanceId = appIdentifier.instanceId;
   if (!instanceId) {
-    const appInstance = appIdentifier?.accessToken
-      ? parseAccessToken(appIdentifier.accessToken)
-      : await getAppInstance();
+    if (!appIdentifier.accessToken) {
+      throw new Error('app-data:appIdentifier - instanceId or accessToken is required');
+    }
+    const appInstance = await parseAccessToken(appIdentifier.accessToken!);
     instanceId = appInstance.instance?.instanceId;
   }
   return `shipping-app-data:${instanceId}`;

@@ -1,6 +1,6 @@
 import { Box, Card, Divider, Text, TextButton, SkeletonLine } from '@wix/design-system';
 import { ArrowRight } from '@wix/wix-ui-icons-common';
-import { useSDK } from '@/app/utils/wix-sdk.client';
+import { useSDK } from '@/app/utils/wix-sdk.client-only';
 import { WixPageId } from '@/app/utils/navigation.const';
 import { useOrders } from '@/app/client-hooks/orders';
 import React from 'react';

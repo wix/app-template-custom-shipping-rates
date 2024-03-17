@@ -1,5 +1,5 @@
 'use client';
-import { useSDK } from '@/app/utils/wix-sdk.client';
+import { useSDK } from '@/app/utils/wix-sdk.client-only';
 import { useSearchParams } from 'next/navigation';
 
 export const useAccessToken = () => {
