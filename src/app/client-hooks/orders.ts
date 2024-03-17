@@ -8,7 +8,8 @@ export const useOrders = () => {
   return useQuery({
     queryKey: ['orders'],
     queryFn: async () => {
-      return accessTokenPromise.then((accessToken) => getLastOrders(accessToken));
+      const accessToken = (await accessTokenPromise)!;
+      return getLastOrders({ accessToken });
     },
   });
 };

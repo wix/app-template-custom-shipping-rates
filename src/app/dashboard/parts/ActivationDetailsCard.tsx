@@ -1,4 +1,4 @@
-import { useSDK } from '@/app/utils/wix-sdk.client';
+import { useSDK } from '@/app/utils/wix-sdk.client-only';
 import { Box, Card, Text, TextButton } from '@wix/design-system';
 import { WixPageId } from '@/app/utils/navigation.const';
 

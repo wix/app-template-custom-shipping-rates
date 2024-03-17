@@ -1,4 +1,4 @@
-import { useSDK } from '@/app/utils/wix-sdk.client';
+import { useSDK } from '@/app/utils/wix-sdk.client-only';
 import { useState } from 'react';
 import { Box, Card, Cell, Collapse, Dropdown, FormField, Input, Layout, Text, TextButton } from '@wix/design-system';
 import { ChevronDown, ChevronUp } from '@wix/wix-ui-icons-common';

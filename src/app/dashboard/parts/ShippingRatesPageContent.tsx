@@ -1,6 +1,6 @@
 'use client';
 import { Box, Breadcrumbs, Button, Cell, Layout, Loader, Page } from '@wix/design-system';
-import { useSDK } from '@/app/utils/wix-sdk.client';
+import { useSDK } from '@/app/utils/wix-sdk.client-only';
 import { useCallback, useEffect, useState } from 'react';
 import { ActivationDetailsCard } from '@/app/dashboard/parts/ActivationDetailsCard';
 import { ShippingDeliveryMethodForm } from '@/app/dashboard/parts/ShippingDeliveryMethodForm';
