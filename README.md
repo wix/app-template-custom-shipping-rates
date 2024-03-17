@@ -58,27 +58,38 @@ Follow your platform's instructions to clone the repo and deploy the app server,
 
 To generate an app in the [Wix Dev Center](https://dev.wix.com/docs/build-apps/developer-tools/developers-center/get-started-with-the-wix-developers-center) and pre-configure it automatically for the template:
 
-1. Go back to the original quick deployment browser window.
+1. On the template page, click **Use Template**.
+
+1. Under **Select your hosting service**, select **Deploy somewhere else** and click **Continue**.
+
+1. Under **Add your base URL**, enter your deployment's base URL.
 
 1. Under **App name**, enter a name for your app. For example: "Custom Shipping Rates".
-
-1. Under **Base URL**, enter the base URL you saved earlier.
 
 1. Click **Create & Continue**.
 
 This creates an app for you in the Wix Dev Center with the required URLs and permissions pre-configured.
 
 
-
 ### Step 3 | Configure environment variables
 
-Once your app is created, a screen appears with environment variables you need to copy to your app code:
+Once your app is created, a screen appears with a code snippet containing environment variables you need to save in your app code:
 
 + `WIX_APP_ID`: Your app's Wix App ID.
 + `WIX_APP_SECRET`: Your app's secret key.
 + `WIX_APP_JWT_KEY`: Your app's public key.
 
-Save these environment variables inthe `.env` file in your app code and redeploy the app. When deployment is finished, your app is ready to install.
+Save these environment variables as follows:
+
+1. Click **copy** to copy the code snippet to the clipboard.
+
+1. Create a file in your production root folder called `.env`, paste the code snippet into the file and save it.
+
+    **Note:** Always keep your `.env` secure and never commit it to version control. This file contains sensitive keys that should not be exposed publicly.
+
+1. Redeploy the app.
+
+When deployment is finished, your app is ready to install.
 
 
 ### Step 4 | Test the app
@@ -179,10 +190,11 @@ Customize the dashboard page to fit your specific needs, whether it's updating t
 This file contains the parent component for the dashboard interface. The interface uses the app model defined in [`src/app/types/app-data.model.ts`](./src/app/types/app-data.model.ts) to provide an array of shipping delivery methods. It's a prime location for extending the dashboard functionality or integrating additional services.
 
 #### Server actions support
-Server actions were introduced in Next 13.5, and are a great way to handle server logic in a Next.js app.
-The template was created with server actions in mind, and the dashboard page is a great place to start using them.
+
+[Server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) were introduced in Next 13.5, and are a great way to handle server logic in a Next.js app.
+This template was created with server actions in mind, and the dashboard page is a great place to start using them.
 Since not all deployment providers support server actions, the template is set up **not** to use server actions by default.
-In order to use server actions, just uncomment `// 'use server';` in the actions definitions in [`src/app/actions/app-data.ts`](./src/app/actions/app-data.ts) and [`src/app/actions/orders.ts`](./src/app/actions/orders.ts) and redeploy the app.
+In order to use server actions, just uncomment `// 'use server';` at the top of [`src/app/actions/app-data.ts`](./src/app/actions/app-data.ts) and [`src/app/actions/orders.ts`](./src/app/actions/orders.ts) and redeploy the app.
 
 ### Integrate the app with an external database
 
