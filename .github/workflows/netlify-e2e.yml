@@ -10,6 +10,10 @@ on:
       prNumber:
         description: 'Pull request number (optional)'
         required: false
+      shouldUpdateBaseline:
+        description: 'should the baseline be updated, when UI updates and you want to update the screenshots to be used as baseline'
+        required: false
+        default: "false"
 jobs:
   netlify-e2e:
     timeout-minutes: 60
@@ -40,3 +44,5 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           prNumber: ${{ github.event.inputs.prNumber || github.event.pull_request.number }}
           provider-deployment-url: ${{ env.DEPLOYMENT_URL }}
+          shouldUpdateBaseline: ${{ github.event.inputs.shouldUpdateBaseline }}
+          actor: ${{ github.actor }}
