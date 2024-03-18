@@ -1,21 +1,22 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 import testIds from '@/app/utils/test-ids';
 
 test.describe('Dashboard Page', () => {
   const PATH = '/dashboard?accessToken=test-token';
 
-  test('look and feel - default', async ({ page }) => {
+  const openDashboard = async (page: Page) => {
     await page.goto(PATH);
+    await page.getByTestId(testIds.DASHBOARD.SHIPPING_METHOD_EXPAND).first().waitFor({ state: 'visible' });
+  };
 
-    await page.getByTestId(testIds.DASHBOARD.SHIPPING_METHOD_EXPAND).waitFor({ state: 'visible', timeout: 5000 });
+  test('look and feel - default', async ({ page }) => {
+    await openDashboard(page);
 
     await expect(page.getByTestId(testIds.DASHBOARD.WRAPPER)).toHaveScreenshot('dashboard-default.png');
   });
 
   test('look and feel - expand express method', async ({ page }) => {
-    await page.goto(PATH);
-
-    await page.getByTestId(testIds.DASHBOARD.SHIPPING_METHOD_EXPAND).waitFor({ state: 'visible', timeout: 5000 });
+    await openDashboard(page);
 
     const [_, expressMethod] = await page.getByTestId(testIds.DASHBOARD.SHIPPING_METHOD).all();
 
