@@ -12,6 +12,10 @@ on:
       prNumber:
         description: 'Pull request number (optional)'
         required: false
+      shouldUpdateBaseline:
+        description: 'should the baseline be updated, when UI updates and you want to update the screenshots to be used as baseline'
+        required: false
+        default: "false"
 jobs:
   vercel-e2e:
     if: github.event.inputs.deploymentUrl || (github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && contains(github.event.deployment_status.target_url, 'vercel-demo-wix-appointments')) # TODO: change to your site name
@@ -37,3 +41,5 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           prNumber: ${{ github.event.inputs.prNumber }}
           provider-deployment-url: ${{ env.DEPLOYMENT_URL }}
+          shouldUpdateBaseline: ${{ github.event.inputs.shouldUpdateBaseline }}
+          actor: ${{ github.actor }}
