@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "e2e": "npx playwright test",
+    "e2e:update": "npx playwright test --update-snapshots",
     "test": "npm run e2e",
     "all": "npm run lint && npm run build && npm run test",
     "dev": "next dev --experimental-https",

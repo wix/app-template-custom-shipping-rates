@@ -13,6 +13,9 @@ inputs:
   prNumber:
     description: 'Pull request ID (optional)'
     required: false
+  shouldUpdateBaseline:
+    description: 'should the baseline be updated, when UI updates and you want to update the screenshots to be used as baseline'
+    required: false
 outputs:
   conclusion:
     description: 'E2E result'
@@ -21,7 +24,12 @@ runs:
   steps:
     - name: Run E2E Tests on Netlify URL
       id: playwright-e2e
-      run: REMOTE_PROVIDER=${{ inputs.provider }} npm run e2e
+      run: |
+        if [[ "${{ inputs.shouldUpdateBaseline }}" == "true" ]]; then
+          REMOTE_PROVIDER=${{ inputs.provider }} npm run e2e:update
+        else
+          REMOTE_PROVIDER=${{ inputs.provider }} npm run e2e
+        fi
       shell: bash
       env:
         PLAYWRIGHT_TEST_BASE_URL: ${{ inputs.provider-deployment-url }}
@@ -111,3 +119,12 @@ runs:
               console.warn('Error creating comment:', error, ' flow continues');
             });
           }
+    - name: Commit and Push Updated Screenshots if defined
+      if: inputs.shouldUpdateBaseline == 'true'
+      run: |
+        git config --global user.email ${{inputs.actor}}
+        git config --global user.name "actions@users.noreply.github.com"
+        git add tests/e2e/__screenshots__/${{inputs.provider}}/*
+        git commit -m "Update baseline screenshots for ${{inputs.provider}}"
+        git push
+      shell: bash
