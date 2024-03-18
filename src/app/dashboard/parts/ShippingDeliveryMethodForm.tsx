@@ -1,8 +1,8 @@
-import { useSDK } from '@/app/utils/wix-sdk.client-only';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Card, Cell, Collapse, Dropdown, FormField, Input, Layout, Text, TextButton } from '@wix/design-system';
 import { ChevronDown, ChevronUp } from '@wix/wix-ui-icons-common';
 import { ShippingCosts, ShippingMethodType, ShippingUnitOfMeasure } from '@/app/types/app-data.model';
+import testIds from '@/app/utils/test-ids';
 
 export function ShippingDeliveryMethodForm({
   title,
@@ -27,15 +27,20 @@ export function ShippingDeliveryMethodForm({
         ? 'lb'
         : 'kg';
   const [isOpen, setIsOpen] = useState(expandByDefault);
+
   return (
-    <Card>
+    <Card dataHook={testIds.DASHBOARD.SHIPPING_METHOD}>
       <Card.Header
         title={title}
-        suffix={<TextButton onClick={() => setIsOpen(!isOpen)}>{isOpen ? <ChevronUp /> : <ChevronDown />}</TextButton>}
+        suffix={
+          <TextButton dataHook={testIds.DASHBOARD.SHIPPING_METHOD_EXPAND} onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <ChevronUp /> : <ChevronDown />}
+          </TextButton>
+        }
       />
       <Collapse open={isOpen}>
         <Card.Divider />
-        <Card.Content>
+        <Card.Content dataHook={testIds.DASHBOARD.SHIPPING_METHOD_FORM}>
           <Box direction='vertical' gap='SP7'>
             <FormField label='Parameter'>
               <Dropdown

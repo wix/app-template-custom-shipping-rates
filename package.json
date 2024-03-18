@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "all": "npm run lint && npm run build",
+    "e2e": "npx playwright test",
+    "test": "npm run e2e",
+    "all": "npm run lint && npm run build && npm run test",
     "dev": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
@@ -22,6 +24,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@playwright/test": "^1.42.1",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20",
     "@types/react": "^18",

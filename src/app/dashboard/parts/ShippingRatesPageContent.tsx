@@ -8,6 +8,7 @@ import { ShippingAppData, ShippingCosts, ShippingUnitOfMeasure } from '@/app/typ
 import { ShippingMethodSummary } from '@/app/dashboard/parts/ShippingMethodSummary';
 import { WixPageId } from '@/app/utils/navigation.const';
 import { useSetShippingAppData, useShippingAppData } from '@/app/client-hooks/app-data';
+import testIds from '@/app/utils/test-ids';
 
 export const ShippingRatesPageContent = ({}: {}) => {
   const {
@@ -76,7 +77,7 @@ export const ShippingRatesPageContent = ({}: {}) => {
     [loading, onSave, persistedShippingAppData],
   );
   return (
-    <Page height='100vh'>
+    <Page height='100vh' dataHook={testIds.DASHBOARD.WRAPPER}>
       <Page.Header
         actionsBar={<ButtonsBar />}
         breadcrumbs={

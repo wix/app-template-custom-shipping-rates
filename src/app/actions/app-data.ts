@@ -5,6 +5,7 @@
  */
 import { ShippingAppData, ShippingMethodType, ShippingUnitOfMeasure } from '@/app/types/app-data.model';
 import { parseAccessToken } from '@/app/actions/app-instance';
+import { isTestingToken } from '@/app/utils/access-token';
 
 type AppIdentifier = { instanceId?: string; accessToken?: string };
 
@@ -56,6 +57,9 @@ const getDatabaseKey = async (appIdentifier: AppIdentifier) => {
 // This is a shell function. Implement your own logic in this function to fetch data from an external database of your choice.
 export async function getShippingAppData(appIdentifier: AppIdentifier): Promise<ShippingAppData> {
   try {
+    if (isTestingToken(appIdentifier?.accessToken)) {
+      return (await import('@/app/utils/mocks-server')).getTestingShippingAppData();
+    }
     const databaseKey = await getDatabaseKey(appIdentifier);
     console.log('getShippingAppData::key - ', databaseKey);
     return defaultAppData;
@@ -67,6 +71,9 @@ export async function getShippingAppData(appIdentifier: AppIdentifier): Promise<
 
 // This is a shell function. Implement your own logic to persist data in an external database of your choice.
 export async function setShippingAppData(data: ShippingAppData, appIdentifier: AppIdentifier): Promise<void> {
+  if (isTestingToken(appIdentifier?.accessToken)) {
+    return;
+  }
   const databaseKey = await getDatabaseKey(appIdentifier);
   console.log('persistShippingAppData::key: ', databaseKey, ' data: ', JSON.stringify(data, null, 2));
 }
