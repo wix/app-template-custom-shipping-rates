@@ -10,31 +10,32 @@ import { isTestingToken } from '@/app/utils/access-token';
 
 export async function getLastOrders({ accessToken }: { accessToken: string }): Promise<OrderSummary[]> {
   const sdk = createSdk(accessToken);
-  return isTestingToken(accessToken)
-    ? (await import('@/app/utils/mocks-server')).getTestOrders()
-    : sdk.orders
-        .searchOrders({
+  return (
+    isTestingToken(accessToken)
+      ? (await import('@/app/utils/mocks-server')).getTestOrders()
+      : sdk.orders.searchOrders({
           search: {
             cursorPaging: {
               limit: 3,
             },
           },
         })
-        .then((res) => {
-          return (
-            res.orders?.map(
-              (order) =>
-                ({
-                  id: order.number ?? '',
-                  createdDate: order?._createdDate ?? '',
-                  totalPrice: order?.priceSummary?.totalPrice?.amount ?? 0,
-                  currency: order?.currency ?? 'USD',
-                }) as OrderSummary,
-            ) ?? []
-          );
-        })
-        .catch((e) => {
-          console.error('Failed to fetch orders.ts: ', e);
-          return [];
-        });
+  )
+    .then((res) => {
+      return (
+        res.orders?.map(
+          (order) =>
+            ({
+              id: order.number ?? '',
+              createdDate: order?._createdDate ?? '',
+              totalPrice: order?.priceSummary?.total?.amount ?? 0,
+              currency: order?.currency ?? 'USD',
+            }) as OrderSummary,
+        ) ?? []
+      );
+    })
+    .catch((e) => {
+      console.error('Failed to fetch orders.ts: ', e);
+      return [];
+    });
 }
