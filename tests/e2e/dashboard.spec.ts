@@ -7,11 +7,15 @@ test.describe('Dashboard Page', () => {
   test('look and feel - default', async ({ page }) => {
     await page.goto(PATH);
 
+    await page.getByTestId(testIds.DASHBOARD.SHIPPING_METHOD_EXPAND).waitFor({ state: 'visible', timeout: 5000 });
+
     await expect(page.getByTestId(testIds.DASHBOARD.WRAPPER)).toHaveScreenshot('dashboard-default.png');
   });
 
   test('look and feel - expand express method', async ({ page }) => {
     await page.goto(PATH);
+
+    await page.getByTestId(testIds.DASHBOARD.SHIPPING_METHOD_EXPAND).waitFor({ state: 'visible', timeout: 5000 });
 
     const [_, expressMethod] = await page.getByTestId(testIds.DASHBOARD.SHIPPING_METHOD).all();
 
