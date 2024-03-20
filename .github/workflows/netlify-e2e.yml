@@ -29,7 +29,7 @@ jobs:
           DEPLOYMENT_STATUS: ${{ github.event.deployment_status.state }}
           TARGET_URL: ${{ github.event.deployment_status.target_url }}
         run: |
-          SITE_NAME=$(jq -r '.vercelSiteName // empty' ci.config.json)
+          SITE_NAME=$(jq -r '.netlifySiteName // empty' ci.config.json)
 
           if [[ -n "$DEPLOYMENT_URL" || (-n "$SITE_NAME" && "$DEPLOYMENT_STATUS" == "success" && "$TARGET_URL" == *"$SITE_NAME"*) ]]; then
             echo "proceed=true" >> $GITHUB_OUTPUT
@@ -38,6 +38,7 @@ jobs:
           fi
 
           echo site_name="$SITE_NAME" >> $GITHUB_OUTPUT
+          cat $GITHUB_OUTPUT
   netlify-e2e:
     needs: check_config
     if: needs.check_config.outputs.proceed == 'true'
