@@ -40,6 +40,7 @@ jobs:
           fi
           
           echo site_name="$SITE_NAME" >> $GITHUB_OUTPUT
+          cat $GITHUB_OUTPUT
   vercel-e2e:
     needs: check_config
     if: needs.check_config.outputs.proceed == 'true'

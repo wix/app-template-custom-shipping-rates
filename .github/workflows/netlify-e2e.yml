@@ -31,7 +31,7 @@ jobs:
         run: |
           SITE_NAME=$(jq -r '.netlifySiteName // empty' ci.config.json)
 
-          if [[ -n "$DEPLOYMENT_URL" || (-n "$SITE_NAME" && "$DEPLOYMENT_STATUS" == "success" && "$TARGET_URL" == *"$SITE_NAME"*) ]]; then
+          if [[ -n "$DEPLOYMENT_URL" || -n "$SITE_NAME" ]]; then
             echo "proceed=true" >> $GITHUB_OUTPUT
           else
             echo "proceed=false" >> $GITHUB_OUTPUT
