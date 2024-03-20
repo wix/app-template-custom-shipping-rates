@@ -17,8 +17,32 @@ on:
         required: false
         default: "false"
 jobs:
+  check_config:
+    runs-on: ubuntu-latest
+    outputs:
+      proceed: ${{ steps.should_run.outputs.proceed }}
+      site_name: ${{ steps.should_run.outputs.site_name }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Preliminary checks
+        id: should_run
+        env:
+          DEPLOYMENT_URL: ${{ github.event.inputs.deploymentUrl }}
+          DEPLOYMENT_STATUS: ${{ github.event.deployment_status.state }}
+          TARGET_URL: ${{ github.event.deployment_status.target_url }}
+        run: |
+          SITE_NAME=$(jq -r '.vercelSiteName // empty' ci.config.json)
+          
+          if [[ -n "$DEPLOYMENT_URL" || (-n "$SITE_NAME" && "$DEPLOYMENT_STATUS" == "success" && "$TARGET_URL" == *"$SITE_NAME"*) ]]; then
+            echo "proceed=true" >> $GITHUB_OUTPUT
+          else
+            echo "proceed=false" >> $GITHUB_OUTPUT
+          fi
+          
+          echo site_name="$SITE_NAME" >> $GITHUB_OUTPUT
   vercel-e2e:
-    if: github.event.inputs.deploymentUrl || (github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && contains(github.event.deployment_status.target_url, 'app-template-custom-shipping-rates')) # TODO: change to your site name
+    needs: check_config
+    if: needs.check_config.outputs.proceed == 'true'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
