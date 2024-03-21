@@ -1,4 +1,5 @@
 {
   "vercelSiteName": "app-template-custom-shipping-rates",
-  "netlifySiteName": "app-template-custom-shipping-rates"
+  "netlifySiteName": "app-template-custom-shipping-rates",
+  "test": true
 }
