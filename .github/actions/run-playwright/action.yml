@@ -2,19 +2,19 @@ name: 'Store Playwright Results'
 description: 'Store Playwright Results'
 inputs:
   provider-deployment-url:
-    description: 'The deployment URL to test with'
+    description: 'The deployment URL to test with:'
     required: true
   provider:
-    description: 'Which next deployment provider is used'
+    description: 'Which Next.js deployment provider is used:'
     required: true
   githubToken:
-    description: 'GitHub Token'
+    description: 'GitHub token:'
     required: true
   prNumber:
-    description: 'Pull request ID (optional)'
+    description: 'Pull request number (optional):'
     required: false
   shouldUpdateBaseline:
-    description: 'should the baseline be updated, when UI updates and you want to update the screenshots to be used as baseline'
+    description: 'Should the baseline be updated to reflect updates to the UI?'
     required: false
 outputs:
   conclusion:

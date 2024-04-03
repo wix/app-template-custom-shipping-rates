@@ -5,13 +5,13 @@ on:
   workflow_dispatch:
     inputs:
       deploymentUrl:
-        description: 'The deployment URL to test with, do not forget to update your own site name'
+        description: 'Deployment URL to test with:'
         required: true
       prNumber:
-        description: 'Pull request number (optional)'
+        description: 'Pull request number (optional):'
         required: false
       shouldUpdateBaseline:
-        description: 'should the baseline be updated, when UI updates and you want to update the screenshots to be used as baseline'
+        description: 'Should the baseline be updated to reflect updates to the UI?'
         required: false
         default: "false"
 jobs:
