@@ -72,7 +72,7 @@ runs:
             const checksForPr = await github.rest.checks.listForRef({
               owner: owner,
               repo: repo,
-              ref: pullRequest.data.head.ref,
+              ref: pullRequest.data.head.sha,
             });
           
             let checkRunId = null;
