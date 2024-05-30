@@ -1,8 +1,8 @@
-import { GetShippingRatesRequest, ProductItem, WeightUnit } from '@/app/types/shipping-provider-spi';
+import { shippingRates } from '@wix/ecom/build/cjs/service-plugins';
 import { ShippingCosts, ShippingUnitOfMeasure } from '@/app/types/app-data.model';
 
 export function calculatePrice(
-  request: GetShippingRatesRequest,
+  request: shippingRates.GetShippingRatesRequest,
   shippingCosts: ShippingCosts,
   unitOfMeasure: ShippingUnitOfMeasure,
 ): number {
@@ -28,9 +28,15 @@ export function calculatePrice(
   }
 }
 
-const toKilograms = (amount: number, weightUnit?: WeightUnit) => amount * (weightUnit === WeightUnit.LB ? 0.453592 : 1);
-const toPounds = (amount: number, weightUnit?: WeightUnit) => amount * (weightUnit === WeightUnit.KG ? 2.20462 : 1);
-const lineItemUnit = (lineItem: ProductItem, unitOfMeasure: ShippingUnitOfMeasure, weightUnit?: WeightUnit) =>
+const toKilograms = (amount: number, weightUnit?: shippingRates.WeightUnit) =>
+  amount * (weightUnit === shippingRates.WeightUnit.LB ? 0.453592 : 1);
+const toPounds = (amount: number, weightUnit?: shippingRates.WeightUnit) =>
+  amount * (weightUnit === shippingRates.WeightUnit.KG ? 2.20462 : 1);
+const lineItemUnit = (
+  lineItem: shippingRates.ProductItem,
+  unitOfMeasure: ShippingUnitOfMeasure,
+  weightUnit?: shippingRates.WeightUnit,
+) =>
   (lineItem.quantity ?? 1) *
   (unitOfMeasure === ShippingUnitOfMeasure.WEIGHT_IN_KG
     ? toKilograms(lineItem?.physicalProperties?.weight || 1, weightUnit)
