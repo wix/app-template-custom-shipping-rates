@@ -8,7 +8,7 @@ wixAppClient.shippingRates.provide({
 
     const currency = metadata.currency;
 
-    // The SPI implementation: Return the shipping rates.
+    // The SPI implementation: implement your own shipping rates.
     return {
       shippingRates: appData.shippingMethods.map(({ code, title, logistics, costs, unitOfMeasure }) => ({
         code,
