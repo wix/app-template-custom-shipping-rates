@@ -70,7 +70,7 @@ runs:
               pull_number: prNumber,
             });
 
-            const isSameRepo = pullRequest.data.head.repo.full_name === `${context.repo.owner}/${context.repo.repo}`;
+            const isSameRepo = pullRequest.data.head.repo.full_name === `${contextOwner}/${contextRepo}`;
 
             const prOwner = isSameRepo ? contextOwner : pullRequest.data.head.repo.owner.login;
             const prRepo = isSameRepo ? contextRepo : pullRequest.data.head.repo.name;
@@ -111,7 +111,7 @@ runs:
               `## ${conclusion === 'success' ? ':green_circle:' : ':red_circle:'} Playwright E2E for ${provider.toUpperCase()}`,
               `| Name | Info  |`,
               `|------|---------|`,
-              `| Summary | [Action Summary](https://github.com/${owner}/${repo}/actions/runs/${runId}/) |`,
+              `| Summary | [Action Summary](https://github.com/${contextOwner}/${contextRepo}/actions/runs/${runId}/) |`,
               `| Site URL | [${deploymentUrl}](${deploymentUrl}) |`,
             ];
             const comment = artifactLinks.join('\n');
