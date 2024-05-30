@@ -59,27 +59,27 @@ runs:
 
           if (prNumber && conclusion) {
             core.setOutput('conclusion', conclusion);
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
+            const contextOwner = context.repo.owner;
+            const contextRepo = context.repo.repo;
             const jobName = context.job;
             const runId = context.runId;
 
             const pullRequest = await github.rest.pulls.get({
-              owner,
-              repo,
+              owner: contextOwner,
+              repo: contextRepo,
               pull_number: prNumber,
             });
 
             const isSameRepo = pullRequest.data.head.repo.full_name === `${context.repo.owner}/${context.repo.repo}`;
 
-            const prOwner = isSameRepo ? context.repo.owner : pullRequest.data.head.repo.owner.login;
-            const prRepo = isSameRepo ? context.repo.repo : pullRequest.data.head.repo.name;
+            const prOwner = isSameRepo ? contextOwner : pullRequest.data.head.repo.owner.login;
+            const prRepo = isSameRepo ? contextRepo : pullRequest.data.head.repo.name;
 
             let checkRunId = null;
             const checksForPr = await github.rest.checks.listForRef({
               owner: prOwner,
               repo: prRepo,
-              ref: pullRequest.data.head.sha,               
+              ref: pullRequest.data.head.sha,
             });
 
             for (const checkRun of checksForPr.data.check_runs) {
@@ -88,11 +88,11 @@ runs:
                 break;
               }
             }
-            
+
             if (checkRunId) {
               const checkInput = {
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+                owner: contextOwner,
+                repo: contextRepo,
                 check_run_id: checkRunId,
                 pull_request: prNumber,
                 status: 'completed',
@@ -116,8 +116,8 @@ runs:
             ];
             const comment = artifactLinks.join('\n');
             github.rest.issues.createComment({
-              owner: prOwner,
-              repo: prRepo,
+              owner: contextOwner,
+              repo: contextRepo,
               issue_number: pullRequest.data.number,
               body: comment
             }).catch((error) => {
