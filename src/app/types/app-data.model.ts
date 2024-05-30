@@ -1,4 +1,5 @@
-import { DeliveryLogistics } from '@/app/types/shipping-provider-spi';
+import { shippingRates } from '@wix/ecom/service-plugins';
+
 /**
  * The unit of measure to calculate the shipping cost.
  */
@@ -53,7 +54,7 @@ export interface ShippingAppData {
     title: string;
 
     /** Optional logistics information, i.e. `logistics.deliveryTime = "3-5 business days"` */
-    logistics?: DeliveryLogistics;
+    logistics?: shippingRates.DeliveryLogistics;
 
     /** Type of the shipping method (e.g., STANDARD, EXPRESS). */
     type: ShippingMethodType;

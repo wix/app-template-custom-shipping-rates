@@ -1,32 +1,29 @@
 import { getShippingAppData } from '@/app/actions/app-data';
-import { GetShippingRatesData, GetShippingRatesResponse } from '@/app/types/shipping-provider-spi';
 import { calculatePrice } from '@/app/utils/shipping-calculator';
 import { wixAppClient } from '@/app/utils/wix-sdk.app';
-import { SPIDefinition } from '@wix/sdk';
+
+wixAppClient.shippingRates.provide({
+  async getShippingRates({ request, metadata }) {
+    const appData = await getShippingAppData({ instanceId: metadata.instanceId! });
+
+    const currency = metadata.currency;
+
+    // The SPI implementation: implement your own shipping rates.
+    return {
+      shippingRates: appData.shippingMethods.map(({ code, title, logistics, costs, unitOfMeasure }) => ({
+        code,
+        title,
+        logistics,
+        cost: {
+          price: `${calculatePrice(request, costs, unitOfMeasure)}`,
+          currency: currency!,
+        },
+      })),
+    };
+  },
+});
 
 export async function POST(request: Request) {
   console.info('Shipping rates::POST - called');
-  const shippingRatesSPI = wixAppClient.spi<SPIDefinition<GetShippingRatesData, GetShippingRatesResponse>>();
-
-  // Verify that the data was not altered, and get the input.
-  const input = await shippingRatesSPI.processRequest(request);
-
-  const appData = await getShippingAppData({ instanceId: input.metadata.instanceId });
-
-  const currency = input.metadata.currency;
-
-  // Return the shipping rates.
-  const result = shippingRatesSPI.result({
-    shippingRates: appData.shippingMethods.map(({ code, title, logistics, costs, unitOfMeasure }) => ({
-      code,
-      title,
-      logistics,
-      cost: {
-        price: `${calculatePrice(input.request, costs, unitOfMeasure)}`,
-        currency,
-      },
-    })),
-  });
-
-  return Response.json(result);
+  return wixAppClient.servicePlugins.processRequest(request, 'ECOM_SHIPPING_RATES');
 }
