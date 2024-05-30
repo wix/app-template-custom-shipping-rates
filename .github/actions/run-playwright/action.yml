@@ -56,7 +56,7 @@ runs:
           const prNumber = '${{ inputs.prNumber }}';
           const provider = '${{ inputs.provider }}';
           const deploymentUrl = '${{ inputs.provider-deployment-url }}';
-          
+
           if (prNumber && conclusion) {
             core.setOutput('conclusion', conclusion);
             const owner = context.repo.owner;
@@ -69,21 +69,20 @@ runs:
               repo,
               pull_number: prNumber,
             });
-            const checksForPr = await github.rest.checks.listForRef({
-              owner: owner,
-              repo: repo,
-              ref: pullRequest.data.head.sha,
-            });
-          
+
             let checkRunId = null;
+            const checksForPr = await github.rest.checks.listForRef({
+              owner: pullRequest.data.head.repo.owner.login, 
+              repo: pullRequest.data.head.repo.name,         
+              ref: pullRequest.data.head.sha,               
+            });
             for (const checkRun of checksForPr.data.check_runs) {
               if (checkRun.name === jobName) {
                 checkRunId = checkRun.id;
-                console.log(`Found Check Run ID: ${checkRunId}`);
                 break;
               }
             }
-          
+
             if (checkRunId) {
               const checkInput = {
                 owner,
@@ -101,10 +100,10 @@ runs:
                 console.warn('Error updating check:', error, ' flow continues');
               });
             }
-            // Create a comment with the artifact links on the pull request
+            
             const artifactLinks = [
               `## ${conclusion === 'success' ? ':green_circle:' : ':red_circle:'} Playwright E2E for ${provider.toUpperCase()}`,
-              `| Name | Info    |`,
+              `| Name | Info  |`,
               `|------|---------|`,
               `| Summary | [Action Summary](https://github.com/${owner}/${repo}/actions/runs/${runId}/) |`,
               `| Site URL | [${deploymentUrl}](${deploymentUrl}) |`,
