@@ -100,7 +100,12 @@ runs:
                 console.warn('Error updating check:', error, ' flow continues');
               });
             }
-            
+
+            // Determine the correct owner for the comment based on PR origin
+            const commentOwner = pullRequest.data.head.repo.full_name === `${context.repo.owner}/${context.repo.repo}`
+              ? context.repo.owner
+              : pullRequest.data.head.repo.owner.login;
+
             const artifactLinks = [
               `## ${conclusion === 'success' ? ':green_circle:' : ':red_circle:'} Playwright E2E for ${provider.toUpperCase()}`,
               `| Name | Info  |`,
@@ -110,8 +115,8 @@ runs:
             ];
             const comment = artifactLinks.join('\n');
             github.rest.issues.createComment({
-              owner,
-              repo,
+              owner: commentOwner, 
+              repo: pullRequest.data.head.repo.name,
               issue_number: pullRequest.data.number,
               body: comment
             }).catch((error) => {
