@@ -2,7 +2,7 @@ import { getShippingAppData } from '@/app/actions/app-data';
 import { calculatePrice } from '@/app/utils/shipping-calculator';
 import { wixAppClient } from '@/app/utils/wix-sdk.app';
 
-wixAppClient.shippingRates.provide({
+wixAppClient.shippingRates.provideHandlers({
   async getShippingRates({ request, metadata }) {
     const appData = await getShippingAppData({ instanceId: metadata.instanceId! });
 
@@ -25,5 +25,5 @@ wixAppClient.shippingRates.provide({
 
 export async function POST(request: Request) {
   console.info('Shipping rates::POST - called');
-  return wixAppClient.servicePlugins.processRequest(request, 'ECOM_SHIPPING_RATES');
+  return wixAppClient.servicePlugins.processRequest(request);
 }
