@@ -36,12 +36,12 @@ Before getting started, make sure you have the following set up:
 
 ## Deploy to a free hosting service
 
-This template supports [quick deployment on Vercel or Netlify](https://dev.wix.com/apps-templates/template?id=644fdc01-0c0f-4a7e-ae56-3b3a7875a67c) so you can get your app up and running in minutes. With quick deployment, you can:
+This template supports [quick deployment on Vercel or Netlify](https://dev.wix.com/apps-templates/template?id=0580022b-625e-4467-9f78-28cc3e618483) so you can get your app up and running in minutes. With quick deployment, you can:
 
 + Clone the app template repo and deploy a live app server instantly.
 + Generate a pre-configured app in the [Wix Dev Center](https://dev.wix.com/docs/build-apps/developer-tools/developers-center/get-started-with-the-wix-developers-center). For configuration details, read about [what deployment gives you](#what-deployment-gives-you).
 
-For instructions, go to the [app template page](https://dev.wix.com/apps-templates/template?id=644fdc01-0c0f-4a7e-ae56-3b3a7875a67c).
+For instructions, go to the [app template page](https://dev.wix.com/apps-templates/template?id=0580022b-625e-4467-9f78-28cc3e618483).
 
 
 ## Deployment on a different platform
