@@ -1,4 +1,4 @@
-import { shippingRates } from '@wix/ecom/build/cjs/service-plugins';
+import { shippingRates } from '@wix/ecom/service-plugins';
 import { ShippingCosts, ShippingUnitOfMeasure } from '@/app/types/app-data.model';
 
 export function calculatePrice(
